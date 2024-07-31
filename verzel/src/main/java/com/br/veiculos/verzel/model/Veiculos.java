@@ -1,5 +1,6 @@
 package com.br.veiculos.verzel.model;
 
+import com.br.veiculos.verzel.records.VeiculosDTO;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -23,6 +24,13 @@ public class Veiculos  {
     private BigDecimal valor;
 
     public Veiculos() {}
+
+    public Veiculos(VeiculosDTO data) {
+        this.nome = data.nome();
+        this.marca = data.marca();
+        this.modelo = data.modelo();
+        this.valor = data.valor();
+    }
 
     @Override
     public boolean equals(Object o) {
