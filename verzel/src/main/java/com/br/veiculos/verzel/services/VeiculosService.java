@@ -1,6 +1,7 @@
 package com.br.veiculos.verzel.services;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.br.veiculos.verzel.exceptions.VeiculoNotFoundException;
 import com.br.veiculos.verzel.model.Veiculos;
 import com.br.veiculos.verzel.records.VeiculosDTO;
 import com.br.veiculos.verzel.repository.VeiculosRepository;
@@ -57,5 +58,10 @@ public class VeiculosService {
         out.write(foto.getBytes());
         out.close();
         return fileConvert;
+    }
+
+    public Veiculos findById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new VeiculoNotFoundException("Veículo não encontrado"));
     }
 }
