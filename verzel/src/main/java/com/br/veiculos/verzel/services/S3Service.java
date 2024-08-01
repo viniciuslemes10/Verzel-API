@@ -2,6 +2,7 @@ package com.br.veiculos.verzel.services;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
+import com.br.veiculos.verzel.model.Veiculos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -30,11 +31,11 @@ public class S3Service {
         this.amazonS3 = amazonS3;
     }
 
-    public String uploadImage(MultipartFile foto) {
-        String filename = UUID.randomUUID() + "-" + foto.getOriginalFilename();
+    public String uploadImage(MultipartFile image) {
+        String filename = UUID.randomUUID() + "-" + image.getOriginalFilename();
 
         try {
-            File file = this.converterMultiPartForFile(foto);
+            File file = this.convertMultiPartForFile(image);
             amazonS3.putObject(bucketName, filename, file);
             file.delete();
             return amazonS3.getUrl(bucketName, filename).toString();
@@ -44,10 +45,10 @@ public class S3Service {
         }
     }
 
-    private File converterMultiPartForFile(MultipartFile foto) throws IOException {
-        File fileConvert = new File(Objects.requireNonNull(foto.getOriginalFilename()));
+    private File convertMultiPartForFile(MultipartFile image) throws IOException {
+        File fileConvert = new File(Objects.requireNonNull(image.getOriginalFilename()));
         FileOutputStream out = new FileOutputStream(fileConvert);
-        out.write(foto.getBytes());
+        out.write(image.getBytes());
         out.close();
         return fileConvert;
     }
@@ -55,5 +56,16 @@ public class S3Service {
     public void deleteImage(String image) {
         DeleteObjectRequest deleteObjectRequest = new DeleteObjectRequest(bucketName, image);
         amazonS3.deleteObject(deleteObjectRequest);
+    }
+
+    public String updateVehiclePhoto(Veiculos veiculos, MultipartFile image) {
+        String filename = this.formatPhotoName(veiculos.getFoto());
+        this.deleteImage(filename);
+        return this.uploadImage(image);
+    }
+
+    public String formatPhotoName(String image) {
+        int lastSlashIndex = image.lastIndexOf("/");
+        return image.substring(lastSlashIndex + 1);
     }
 }
