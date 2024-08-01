@@ -53,4 +53,10 @@ public class VeiculosController {
         var veiculos = service.getAllVeciculos(pageable);
         return ResponseEntity.ok(veiculos);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteById(@PathVariable(value = "id") Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
