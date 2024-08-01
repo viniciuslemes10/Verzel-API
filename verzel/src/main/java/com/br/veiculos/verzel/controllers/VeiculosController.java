@@ -54,6 +54,20 @@ public class VeiculosController {
         return ResponseEntity.ok(veiculos);
     }
 
+    @PutMapping(consumes = "multipart/form-data", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<VeiculosDetalhamentoDTO> updateVeiculo(
+        @RequestParam(value = "id") Long id,
+        @RequestParam(value = "nome") String nome,
+        @RequestParam(value = "marca") String marca,
+        @RequestParam(value = "modelo") String modelo,
+        @RequestParam(value = "valor") BigDecimal valor,
+        @RequestParam(value = "foto") MultipartFile foto
+    ) {
+        var data = new VeiculosDTO(nome, marca, modelo, valor, foto);
+        var veiculoUpdate = service.updateVeiculo(id, data);
+        return ResponseEntity.ok(new VeiculosDetalhamentoDTO(veiculoUpdate));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable(value = "id") Long id) {
         service.delete(id);
