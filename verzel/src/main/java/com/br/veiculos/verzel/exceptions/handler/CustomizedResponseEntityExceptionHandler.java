@@ -1,6 +1,7 @@
 package com.br.veiculos.verzel.exceptions.handler;
 
 import com.br.veiculos.verzel.exceptions.ExceptionResponse;
+import com.br.veiculos.verzel.exceptions.PhotoNotProvidedException;
 import com.br.veiculos.verzel.exceptions.VeiculoNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,5 +34,12 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
     }
 
-
+    @ExceptionHandler(PhotoNotProvidedException.class)
+    public final ResponseEntity<ExceptionResponse> handlePhotoNotProvidedException(Exception ex, WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false));
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
 }

@@ -1,5 +1,6 @@
 package com.br.veiculos.verzel.services;
 
+import com.br.veiculos.verzel.exceptions.PhotoNotProvidedException;
 import com.br.veiculos.verzel.exceptions.VeiculoNotFoundException;
 import com.br.veiculos.verzel.model.Veiculos;
 import com.br.veiculos.verzel.records.VeiculosDTO;
@@ -21,9 +22,13 @@ public class VeiculosService {
 
     public Veiculos create(VeiculosDTO data) {
         String generatedImage = null;
-        if(data.foto() != null) {
+
+        if(data.foto().isEmpty()) {
+            throw new PhotoNotProvidedException("Foto do veículo não foi fornecida!");
+        } else {
             generatedImage = s3Service.uploadImage(data.foto());
         }
+
         var veiculo = new Veiculos(data);
         veiculo.setFoto(generatedImage);
         repository.save(veiculo);
