@@ -16,8 +16,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 public class SecurityConfig {
-    @Autowired
-    private JwtTokenProvider tokenProvider;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -31,6 +29,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
+        JwtTokenProvider tokenProvider = new JwtTokenProvider();
         JwtTokenFilter filtro = new JwtTokenFilter(tokenProvider);
         return http
                 .httpBasic(AbstractHttpConfigurer::disable)
