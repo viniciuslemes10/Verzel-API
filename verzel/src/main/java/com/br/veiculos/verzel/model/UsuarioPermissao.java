@@ -7,15 +7,33 @@ import java.util.Objects;
 @Entity
 @Table(name = "usuario_permissao")
 public class UsuarioPermissao {
-    @Id
+    @EmbeddedId
+    private UsuarioPermissaoId id;
+
+    @MapsId("idUsuario")
     @ManyToOne
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "id_usuario", insertable = false, updatable = false)
     private Usuarios usuario;
 
-    @Id
+    @MapsId("idPermissao")
     @ManyToOne
-    @JoinColumn(name = "id_permissao")
+    @JoinColumn(name = "id_permissao", insertable = false, updatable = false)
     private Permissoes permissao;
+
+    public UsuarioPermissao() {}
+
+    public UsuarioPermissao(Usuarios user, Permissoes permissoes) {
+        this.usuario = user;
+        this.permissao = permissoes;
+    }
+
+    public UsuarioPermissaoId getId() {
+        return id;
+    }
+
+    public void setId(UsuarioPermissaoId id) {
+        this.id = id;
+    }
 
     public Usuarios getUsuario() {
         return usuario;

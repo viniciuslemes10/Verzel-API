@@ -1,5 +1,6 @@
 package com.br.veiculos.verzel.model;
 
+import com.br.veiculos.verzel.records.UsuarioDTO;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -46,6 +47,15 @@ public class Usuarios implements UserDetails {
     private List<Permissoes> permissoes;
 
     public Usuarios() {}
+
+    public Usuarios(UsuarioDTO data) {
+        this.email = data.email();
+        this.nomeCompleto = data.nomeCompleto();
+        this.contaNaoExpirada = true;
+        this.contaNaoBloqueada = true;
+        this.credenciaisNaoExpiradas = true;
+        this.habilitado = true;
+    }
 
     public List<String> getRoles() {
         List<String> roles = new ArrayList<>();
