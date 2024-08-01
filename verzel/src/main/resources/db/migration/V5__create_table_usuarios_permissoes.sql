@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `usuariod_permissao` (
+CREATE TABLE IF NOT EXISTS `usuario_permissao` (
   `id_usuario` bigint(20) NOT NULL,
   `id_permissao` bigint(20) NOT NULL,
   PRIMARY KEY (`id_usuario`, `id_permissao`),
