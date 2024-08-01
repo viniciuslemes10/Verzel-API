@@ -1,9 +1,6 @@
 package com.br.veiculos.verzel.exceptions.handler;
 
-import com.br.veiculos.verzel.exceptions.ExceptionResponse;
-import com.br.veiculos.verzel.exceptions.InvalidJwtAuthenticationException;
-import com.br.veiculos.verzel.exceptions.PhotoNotProvidedException;
-import com.br.veiculos.verzel.exceptions.VeiculoNotFoundException;
+import com.br.veiculos.verzel.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -51,5 +48,14 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 ex.getMessage(),
                 request.getDescription(false));
         return new ResponseEntity<>(exceptionResponse, HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(UsuarioEmailNotFoundException.class)
+    public final ResponseEntity<ExceptionResponse> handleUsuarioEmailNotFoundException(Exception ex, WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false));
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
     }
 }
