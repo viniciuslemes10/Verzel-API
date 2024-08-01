@@ -51,6 +51,7 @@ public class Usuarios implements UserDetails {
     public Usuarios(UsuarioDTO data) {
         this.email = data.email();
         this.nomeCompleto = data.nomeCompleto();
+        this.senha = data.senha();
         this.contaNaoExpirada = true;
         this.contaNaoBloqueada = true;
         this.credenciaisNaoExpiradas = true;
