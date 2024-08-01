@@ -4,6 +4,9 @@ import com.br.veiculos.verzel.records.VeiculosDTO;
 import com.br.veiculos.verzel.records.VeiculosDetalhamentoDTO;
 import com.br.veiculos.verzel.services.VeiculosService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/veiculos/v1")
@@ -21,11 +25,11 @@ public class VeiculosController {
 
     @PostMapping(consumes = "multipart/form-data", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<VeiculosDetalhamentoDTO> create(
-            @RequestParam("nome") String nome,
-            @RequestParam("marca") String marca,
-            @RequestParam("modelo") String modelo,
-            @RequestParam("valor") BigDecimal valor,
-            @RequestParam("foto") MultipartFile foto
+            @RequestParam(value = "nome") String nome,
+            @RequestParam(value = "marca") String marca,
+            @RequestParam(value = "modelo") String modelo,
+            @RequestParam(value = "valor") BigDecimal valor,
+            @RequestParam(value = "foto") MultipartFile foto
     ) {
         VeiculosDTO data = new VeiculosDTO(nome, marca, modelo, valor, foto);
         var veiculoSaved = service.create(data);
@@ -36,5 +40,17 @@ public class VeiculosController {
     public ResponseEntity<VeiculosDetalhamentoDTO> getVeiculosById(@PathVariable("id") Long id) {
         var veiculoFound = service.findById(id);
         return ResponseEntity.ok(new VeiculosDetalhamentoDTO(veiculoFound));
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<VeiculosDetalhamentoDTO>> getAllVeiculos(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "12") Integer size,
+            @RequestParam(value = "direction", defaultValue = "desc") String direction
+    ) {
+        var sortDirection = "asc".equalsIgnoreCase(direction) ? Sort.Direction.ASC : Sort.Direction.DESC;
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, "valor"));
+        var veiculos = service.getAllVeciculos(pageable);
+        return ResponseEntity.ok(veiculos);
     }
 }

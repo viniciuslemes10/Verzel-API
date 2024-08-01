@@ -4,15 +4,18 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.br.veiculos.verzel.exceptions.VeiculoNotFoundException;
 import com.br.veiculos.verzel.model.Veiculos;
 import com.br.veiculos.verzel.records.VeiculosDTO;
+import com.br.veiculos.verzel.records.VeiculosDetalhamentoDTO;
 import com.br.veiculos.verzel.repository.VeiculosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -63,5 +66,10 @@ public class VeiculosService {
     public Veiculos findById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new VeiculoNotFoundException("Veículo não encontrado"));
+    }
+
+    public List<VeiculosDetalhamentoDTO> getAllVeciculos(Pageable pageable) {
+        var veiculos = repository.findAll(pageable);
+        return veiculos.stream().map(VeiculosDetalhamentoDTO::new).toList();
     }
 }
