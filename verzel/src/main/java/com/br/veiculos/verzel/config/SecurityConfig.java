@@ -61,7 +61,8 @@ public class SecurityConfig {
                                         "/register/**",
                                         "/auth/*",
                                         "/swagger-ui/**",
-                                        "/v3/api-docs/**"
+                                        "/v3/api-docs/**",
+                                        "api/veiculos/public/v1/**"
                                 ).permitAll()
                                 .requestMatchers(HttpMethod.DELETE, "/api/veiculos/admin/v1/**").hasAuthority("ADMIN")
                                 .requestMatchers(HttpMethod.POST, "/api/veiculos/admin/v1/**").hasAuthority("ADMIN")
