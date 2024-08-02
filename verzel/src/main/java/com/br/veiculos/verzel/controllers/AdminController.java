@@ -26,7 +26,7 @@ public class AdminController {
     private VeiculosService service;
 
     @PostMapping(consumes = "multipart/form-data", produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Criando um Veículo", description = "Add novo Veículo passado em JSON, representando um veículo",
+    @Operation(summary = "Criando um Veículo", description = "Add novo Veículo passado em multipart/form-data, representando um veículo",
             tags = {"Admin"},
             responses = {
                     @ApiResponse(description = "Created", responseCode = "201",
