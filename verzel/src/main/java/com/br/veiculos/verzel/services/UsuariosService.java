@@ -1,10 +1,12 @@
 package com.br.veiculos.verzel.services;
 
 import com.br.veiculos.verzel.exceptions.FailedToSendEmailException;
+import com.br.veiculos.verzel.exceptions.InvalidCodeException;
 import com.br.veiculos.verzel.exceptions.UsuarioEmailNotFoundException;
 import com.br.veiculos.verzel.model.Usuarios;
 import com.br.veiculos.verzel.records.UsuarioDTO;
 import com.br.veiculos.verzel.records.UsuarioPasswordDTO;
+import com.br.veiculos.verzel.records.UsuarioRecoverPasswordDTO;
 import com.br.veiculos.verzel.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -61,7 +63,7 @@ public class UsuariosService implements UserDetailsService {
         return usuario;
     }
 
-    public Usuarios recoverPassword(UsuarioPasswordDTO data) {
+    public Usuarios sendCode(UsuarioPasswordDTO data) {
         var usuario = repository.findByUserEmail(data.email());
 
         if(usuario == null) {
@@ -80,5 +82,22 @@ public class UsuariosService implements UserDetailsService {
 
     private String generateRecoveryCode() {
         return UUID.randomUUID().toString();
+    }
+
+    public Usuarios reconverPassword(UsuarioRecoverPasswordDTO data) {
+        var usuario = repository.findByUserEmail(data.email());
+
+        if(usuario == null) {
+            throw new UsuarioEmailNotFoundException("Email " + data.email() + " não encontrado!");
+        }
+
+        if(data.code().equals(usuario.getCodigo())){
+            usuario.setSenha(data.newPassword());
+            encodePassword(usuario);
+            usuario.setCodigo(null);
+            return repository.save(usuario);
+        }
+
+        throw new InvalidCodeException("Código inválido: " + data.code());
     }
 }

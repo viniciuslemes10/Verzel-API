@@ -3,6 +3,7 @@ package com.br.veiculos.verzel.controllers;
 import com.br.veiculos.verzel.records.UsuarioDTO;
 import com.br.veiculos.verzel.records.UsuarioDetalhamentoDTO;
 import com.br.veiculos.verzel.records.UsuarioPasswordDTO;
+import com.br.veiculos.verzel.records.UsuarioRecoverPasswordDTO;
 import com.br.veiculos.verzel.services.UsuarioPermissoesService;
 import com.br.veiculos.verzel.services.UsuariosService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,14 @@ public class UsuariosController {
     }
 
     @GetMapping("/enviar-codigo")
-    public ResponseEntity<String> recoverPassword(@RequestBody UsuarioPasswordDTO data) {
-        var usuario = service.recoverPassword(data);
+    public ResponseEntity<String> sendCode(@RequestBody UsuarioPasswordDTO data) {
+        var usuario = service.sendCode(data);
         return ResponseEntity.ok("Email enviado com sucesso para: " + usuario.getEmail());
     }
 
-
+    @PostMapping("/recuperar-senha")
+    public ResponseEntity<UsuarioDetalhamentoDTO> recoverPassword(@RequestBody UsuarioRecoverPasswordDTO data) {
+        var usuario = service.reconverPassword(data);
+        return ResponseEntity.ok(new UsuarioDetalhamentoDTO(usuario));
+    }
 }
