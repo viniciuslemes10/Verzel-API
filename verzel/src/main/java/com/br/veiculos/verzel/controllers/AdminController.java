@@ -3,6 +3,11 @@ package com.br.veiculos.verzel.controllers;
 import com.br.veiculos.verzel.records.VeiculosDTO;
 import com.br.veiculos.verzel.records.VeiculosDetalhamentoDTO;
 import com.br.veiculos.verzel.services.VeiculosService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,12 +19,30 @@ import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("api/veiculos/admin/v1")
+@Tag(name = "Admin", description = "Endpoints exclusivos para usuários com permissão de ADMIN")
 public class AdminController {
 
     @Autowired
     private VeiculosService service;
 
     @PostMapping(consumes = "multipart/form-data", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Criando um Veículo", description = "Add novo Veículo passado em JSON, representando um veículo",
+            tags = {"Admin"},
+            responses = {
+                    @ApiResponse(description = "Created", responseCode = "201",
+                            content = @Content(
+                                    mediaType = "multipart/form-data",
+                                    schema = @Schema(
+                                            implementation = VeiculosDetalhamentoDTO.class
+                                    )
+                            )
+                    ),
+                    @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+                    @ApiResponse(description = "Not Authorization", responseCode = "403", content = @Content),
+                    @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
+            }
+    )
     public ResponseEntity<VeiculosDetalhamentoDTO> create(
             @RequestParam(value = "nome") String nome,
             @RequestParam(value = "marca") String marca,
@@ -33,6 +56,24 @@ public class AdminController {
     }
 
     @PutMapping(consumes = "multipart/form-data", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = "multipart/form-data", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Atualizando um Veículo", description = "Atualizando um Veículo passado em multipart/form-data",
+            tags = {"Admin"},
+            responses = {
+                    @ApiResponse(description = "Success", responseCode = "200",
+                            content = @Content(
+                                    mediaType = "multipart/form-data",
+                                    schema = @Schema(
+                                            implementation = VeiculosDetalhamentoDTO.class
+                                    )
+                            )
+                    ),
+                    @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+                    @ApiResponse(description = "Not Authorization", responseCode = "403", content = @Content),
+                    @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
+            }
+    )
     public ResponseEntity<VeiculosDetalhamentoDTO> updateVeiculo(
             @RequestParam(value = "id") Long id,
             @RequestParam(value = "nome") String nome,
@@ -47,6 +88,16 @@ public class AdminController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Deletando Veículo", description = "Deletando Veículo",
+            tags = {"Admin"},
+            responses = {
+                    @ApiResponse(description = "Deleted", responseCode = "204", content = @Content),
+                    @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+                    @ApiResponse(description = "Not Authorization", responseCode = "403", content = @Content),
+                    @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
+            }
+    )
     public ResponseEntity<?> deleteById(@PathVariable(value = "id") Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
