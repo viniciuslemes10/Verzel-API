@@ -4,9 +4,6 @@ import com.br.veiculos.verzel.records.VeiculosDTO;
 import com.br.veiculos.verzel.records.VeiculosDetalhamentoDTO;
 import com.br.veiculos.verzel.services.VeiculosService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @RestController
 @RequestMapping("api/veiculos/admin/v1")
