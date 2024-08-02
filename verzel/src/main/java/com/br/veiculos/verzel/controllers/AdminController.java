@@ -36,24 +36,6 @@ public class AdminController {
         return ResponseEntity.status(HttpStatus.CREATED).body(new VeiculosDetalhamentoDTO(veiculoSaved));
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<VeiculosDetalhamentoDTO> getVeiculosById(@PathVariable("id") Long id) {
-        var veiculoFound = service.findById(id);
-        return ResponseEntity.ok(new VeiculosDetalhamentoDTO(veiculoFound));
-    }
-
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<VeiculosDetalhamentoDTO>> getAllVeiculos(
-            @RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "size", defaultValue = "12") Integer size,
-            @RequestParam(value = "direction", defaultValue = "desc") String direction
-    ) {
-        var sortDirection = "asc".equalsIgnoreCase(direction) ? Sort.Direction.ASC : Sort.Direction.DESC;
-        Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, "valor"));
-        var veiculos = service.getAllVeciculos(pageable);
-        return ResponseEntity.ok(veiculos);
-    }
-
     @PutMapping(consumes = "multipart/form-data", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<VeiculosDetalhamentoDTO> updateVeiculo(
             @RequestParam(value = "id") Long id,
