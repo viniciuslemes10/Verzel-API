@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Código de Recuperação</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header img {
+            width: 300px;
+            height: auto;
+        }
+        h2 {
+            color: #333;
+            font-size: 20px;
+            margin-top: 0;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .recuperacao-code {
+            display: inline-block;
+            background-color: #f2f2f2;
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+        }
+        .footer a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        .footer p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <img src="https://veiculos-images-verzel.s3.us-west-2.amazonaws.com/logo-verzel.png" alt="logo verzel">
+    </div>
+    <h2>Olá {{nome}}, tudo bem?</h2>
+    <p>Você solicitou a recuperação de sua senha. Para definir uma nova senha, copie o código de ativação abaixo e insira-o na página de recuperação:</p>
+    <p class="recuperacao-code">{{codigo}}</p>
+    <div class="footer">
+        <p>Contato: <a href="mailto:verzellemes@gmail.com">verzellemes@gmail.com</a></p>
+        <p>Telefone: (11) 910743175</p>
+        <p>&copy; 2024 Food. Todos os direitos reservados.</p>
+    </div>
+</div>
+</body>
+</html>
