@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `conta_nao_bloqueada` BIT(1) DEFAULT TRUE,
   `credenciais_nao_expiradas` BIT(1) DEFAULT TRUE,
   `habilitado` BIT(1) DEFAULT TRUE,
+  `codigo_recuperacao` VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_email` (`email`)
 ) ENGINE=InnoDB;
