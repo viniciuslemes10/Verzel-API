@@ -38,6 +38,9 @@ public class Usuarios implements UserDetails {
     @Column(name = "habilitado")
     private Boolean habilitado;
 
+    @Column(name = "codigo_recuperacao")
+    private String codigo;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "usuario_permissao",
@@ -105,12 +108,12 @@ public class Usuarios implements UserDetails {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Usuarios usuarios)) return false;
-        return Objects.equals(id, usuarios.id) && Objects.equals(email, usuarios.email) && Objects.equals(nomeCompleto, usuarios.nomeCompleto) && Objects.equals(senha, usuarios.senha) && Objects.equals(contaNaoExpirada, usuarios.contaNaoExpirada) && Objects.equals(contaNaoBloqueada, usuarios.contaNaoBloqueada) && Objects.equals(credenciaisNaoExpiradas, usuarios.credenciaisNaoExpiradas) && Objects.equals(habilitado, usuarios.habilitado) && Objects.equals(permissoes, usuarios.permissoes);
+        return Objects.equals(id, usuarios.id) && Objects.equals(email, usuarios.email) && Objects.equals(nomeCompleto, usuarios.nomeCompleto) && Objects.equals(senha, usuarios.senha) && Objects.equals(contaNaoExpirada, usuarios.contaNaoExpirada) && Objects.equals(contaNaoBloqueada, usuarios.contaNaoBloqueada) && Objects.equals(credenciaisNaoExpiradas, usuarios.credenciaisNaoExpiradas) && Objects.equals(habilitado, usuarios.habilitado) && Objects.equals(codigo, usuarios.codigo) && Objects.equals(permissoes, usuarios.permissoes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, nomeCompleto, senha, contaNaoExpirada, contaNaoBloqueada, credenciaisNaoExpiradas, habilitado, permissoes);
+        return Objects.hash(id, email, nomeCompleto, senha, contaNaoExpirada, contaNaoBloqueada, credenciaisNaoExpiradas, habilitado, codigo, permissoes);
     }
 
     public Long getId() {
@@ -183,5 +186,13 @@ public class Usuarios implements UserDetails {
 
     public void setPermissoes(List<Permissoes> permissoes) {
         this.permissoes = permissoes;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 }
