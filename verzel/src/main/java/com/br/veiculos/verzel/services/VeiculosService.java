@@ -8,6 +8,7 @@ import com.br.veiculos.verzel.records.VeiculosDetalhamentoDTO;
 import com.br.veiculos.verzel.repository.VeiculosRepository;
 import com.br.veiculos.verzel.utils.ValueUpdater;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -45,9 +46,9 @@ public class VeiculosService {
                 .orElseThrow(() -> new VeiculoNotFoundException("Veículo não encontrado"));
     }
 
-    public List<VeiculosDetalhamentoDTO> getAllVeciculos(Pageable pageable) {
-        var veiculos = repository.findAll(pageable);
-        return veiculos.stream().map(VeiculosDetalhamentoDTO::new).toList();
+    public Page<VeiculosDetalhamentoDTO> getAllVeciculos(Pageable pageable) {
+        var veiculosPage = repository.findAll(pageable);
+        return veiculosPage.map(VeiculosDetalhamentoDTO::new);
     }
 
     public void delete(Long id) {

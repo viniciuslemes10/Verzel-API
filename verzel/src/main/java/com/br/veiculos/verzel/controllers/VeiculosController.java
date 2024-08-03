@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -75,7 +76,7 @@ public class VeiculosController {
                     @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
             }
     )
-    public ResponseEntity<List<VeiculosDetalhamentoDTO>> getAllVeiculos(
+    public ResponseEntity<Page<VeiculosDetalhamentoDTO>> getAllVeiculos(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "size", defaultValue = "12") Integer size,
             @RequestParam(value = "direction", defaultValue = "desc") String direction
