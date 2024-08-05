@@ -22,7 +22,7 @@ public class VerzelApplication {
 
 		DelegatingPasswordEncoder senhaDecodificada = new DelegatingPasswordEncoder("pbkdf2", codificar);
 		senhaDecodificada.setDefaultPasswordEncoderForMatches(pbkdf2PasswordEncoder);
-		String senha = senhaDecodificada.encode("lemes123");
+		String senha = senhaDecodificada.encode("admin123");
 		System.out.println(senha);
 	}
 
