@@ -1,0 +1,139 @@
+.header {
+    height: auto;
+    background-color: #fb2f2f;
+    color: #fff;
+    padding: 0 20px;
+    margin: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    position: relative; 
+}
+
+.header-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.image-logo {
+    width: 60px;
+    border-radius: 10px;
+    padding: 7px 0px;
+}
+
+.header .nav-menu-desktop ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.header .nav-menu-desktop ul li {
+    margin: 0;
+}
+
+.header .nav-menu-desktop ul li button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.header .nav-menu-desktop ul li button:hover {
+    border-bottom: 2px solid #FFF;
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.menu-toggle .bar {
+    width: 30px;
+    height: 3px;
+    background-color: #fff;
+    margin: 5px;
+    transition: 0.3s;
+}
+
+.menu-toggle.open .bar:nth-child(1) {
+    transform: rotate(45deg);
+    margin: 0;
+}
+
+.menu-toggle.open .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.open .bar:nth-child(3) {
+    transform: rotate(-45deg);
+    margin: 0;
+}
+
+.nav-menu {
+    display: none;
+    position: absolute;
+    top: 73px;
+    right: -80%;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #fb2f2f;
+    z-index: 1000;
+    padding: 10px;
+    transition: right 0.2s ease-in-out;
+}
+
+.nav-menu.mobile-menu {
+    display: flex;
+    right: 0; 
+    flex-direction: column;
+}
+
+.nav-menu.mobile-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-menu.mobile-menu ul li {
+    text-align: center;
+
+}
+
+.nav-menu.mobile-menu ul li button {
+    width: 100%;
+    padding: 15px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.nav-menu.mobile-menu ul li button:hover {
+    border-bottom: 2px solid #FFF;
+}
+
+@media (max-width: 800px) {
+    .header .nav-menu-desktop {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-menu.mobile-menu {
+        display: flex;
+    }
+}

@@ -1,0 +1,320 @@
+.container-veiculos {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding-bottom: 30px;
+}
+
+.veiculo {
+    display: flex;
+    flex-direction: column;
+    background-color: #FFF;
+    border-radius: 5px;
+    width: 26%;
+    box-sizing: border-box;
+    box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.veiculo img {
+    width: 100%;
+    height: 40%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.veiculo .detalhes {
+    width: 90%;
+    padding: 10px 15px;
+    border: none;
+    display: block;
+    margin-left: 5%;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    background-color: #fb2f2f;
+    color: white;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+.veiculo-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.veiculo-details p {
+    margin: 0px 0px 0px 15px;
+    color: #101010;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.veiculo-details p.nome {
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+
+.veiculo-details p.valor {
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.veiculo-details p.modelo {
+    font-size: 14px;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    padding-bottom: 30px;
+}
+
+.pagination button {
+    background-color: #fb2f2f;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.pagination button.active {
+    background-color: #d93d3d;
+}
+
+.pagination button.disabled {
+    background-color: #e0e0e0;
+    color: #b0b0b0;
+    cursor: not-allowed;
+}
+
+.sort-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding-top: 20px;
+}
+
+.sort-controls select {
+    padding: 8px 16px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.sort-controls label {
+    font-size: 14px;
+    color: #101010;
+}
+
+.modified-veiculos {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #fff;
+    border-top: 1px solid #cfcfcf;
+    border-bottom: 1px solid #cfcfcf;
+    border-radius: 5px;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.modified-veiculos button {
+    background-color: #FFF;
+    color: #fb2f2f;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.modified-veiculos button i {
+    margin-right: 5px;
+}
+
+
+@media (max-width: 1100px) and (min-width: 880px) {
+    .veiculo-details {
+        height: 100%;
+    }
+
+    .veiculo-details p.nome,
+         p.marca {
+        font-size: 18px;
+    }
+
+    .veiculo-details .p.modelo {
+        font-size: 18px;
+    }
+
+    .veiculo-details p.valor {
+        font-size: 24px;
+    }
+
+    .veiculo-detalhes {
+        padding: 5px 10px;
+        height: 100%;
+        padding-bottom: 10px;
+    }
+
+    .modified-veiculos {
+        position: relative;
+        top: 76px;
+    }
+
+    .veiculo .modified-veiculos {
+        position: relative;
+        top: 0px;
+    }
+
+    .modified-veiculos button {
+        padding: 8px 18px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .veiculo {
+        width: 40%;
+    }
+
+    .veiculo-details p.modelo{
+        font-size: 12px;
+
+    }
+}
+
+@media (max-width: 879px) and (min-width: 650px) {
+    .veiculo-details {
+        height: 100%;
+    }
+
+    .veiculo-details p.nome,
+         p.marca {
+        font-size: 18px;
+    }
+
+    .veiculo-details .p.modelo {
+        font-size: 18px;
+    }
+
+    .veiculo-details p.valor {
+        font-size: 22px;
+    }
+
+    .veiculo-detalhes {
+        padding: 5px 10px;
+        height: 100%;
+        padding-bottom: 10px;
+    }
+
+    .modified-veiculos {
+        position: relative;
+        top: 76px;
+    }
+
+    .veiculo .modified-veiculos {
+        position: relative;
+        top: 0px;
+    }
+
+    .modified-veiculos button {
+        margin: 0;
+        padding: 8px 18px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .veiculo {
+        width: 40%;
+    }
+
+    .veiculo-details p.modelo{
+        font-size: 12px;
+
+    }
+
+    .veiculo .detalhes {
+        width: 80%;
+        padding: 8px 10px;
+        margin-left: 10%;
+    }
+}
+
+@media (max-width: 649px) {
+    .veiculo-details {
+        height: 100%;
+    }
+
+    .veiculo-details p.nome,
+         p.marca {
+        font-size: 18px;
+    }
+
+    .veiculo-details .p.modelo {
+        font-size: 18px;
+    }
+
+    .veiculo-details p.valor {
+        font-size: 22px;
+    }
+
+    .veiculo-detalhes {
+        padding: 5px 10px;
+        height: 100%;
+        padding-bottom: 10px;
+    }
+
+    .modified-veiculos {
+        position: relative;
+        top: 76px;
+    }
+
+    .veiculo .modified-veiculos {
+        position: relative;
+        top: 0px;
+    }
+
+    .modified-veiculos button {
+        margin: 0;
+        padding: 8px 18px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .veiculo {
+        width: 80%;
+    }
+
+    .veiculo-details p.modelo{
+        font-size: 12px;
+
+    }
+
+    .veiculo .detalhes {
+        width: 80%;
+        padding: 8px 10px;
+        margin-left: 10%;
+    }
+}

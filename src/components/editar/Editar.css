@@ -1,0 +1,114 @@
+.editar {
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    color: #fb2f2f;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 30%;
+    background-color: #FFF;
+    border-radius: 8px;
+    box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.foto-preview img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.info-details p {
+    margin: 0px 0px 0px 15px;
+    padding-bottom: 10px;
+    color: #101010;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.info-details p.nome {
+    text-transform: uppercase;
+}
+
+.info-details p.valor {
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.info-details p.modelo {
+    font-size: 14px;
+}
+
+.form {
+    height: 300px;
+    flex: 1;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+}
+
+.form label {
+    display: block;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.form input {
+    width: 70%;
+    padding: 8px;
+    margin-left: 5px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.edit-button {
+    display: block;
+    width: 40%;
+    padding: 10px;
+    background-color: #fb2f2f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.edit-salvar {
+    display: block;
+    width: 20%;
+    padding: 10px;
+    background-color: #fb2f2f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+@media (max-width: 649px) {
+    .container {
+        display: block;
+    }
+
+    .info {
+        width: 94%;
+    }
+}
