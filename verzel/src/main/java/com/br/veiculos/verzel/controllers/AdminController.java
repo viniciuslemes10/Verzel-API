@@ -56,7 +56,6 @@ public class AdminController {
     }
 
     @PutMapping(consumes = "multipart/form-data", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PostMapping(consumes = "multipart/form-data", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Atualizando um Veículo", description = "Atualizando um Veículo passado em multipart/form-data",
             tags = {"Admin"},
             responses = {
